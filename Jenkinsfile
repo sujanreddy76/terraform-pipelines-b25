@@ -9,7 +9,7 @@ pipeline{
         )
     }
     environment {
-        GOOGLE_APPLICATION_CREDENTIALS = "${WORKSPACE}/sa-key"
+        GOOGLE_APPLICATION_CREDENTIALS = "${WORKSPACE}/sa-key.json"
     }
     stages {
         stage('Setup GCP Auth') {
