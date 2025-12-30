@@ -26,6 +26,7 @@ pipeline{
             }
             steps {
                 echo "Executing the plan for terraform"
+                sh "terraform plan"
             }
         }
 
@@ -38,6 +39,7 @@ pipeline{
             }
             steps {
                 echo "Applying terraform infra"
+                sh "terraform apply --auto-approve"
             }
         }
 
