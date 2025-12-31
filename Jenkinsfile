@@ -75,7 +75,7 @@ pipeline{
             }
             steps {
                 echo "Destroying the terraform infra"
-                sh "terraform destroy -var-file=${env.TFVARS_FILE} --auto-approv"
+                sh "terraform destroy -var-file=${env.TFVARS_FILE} --auto-approve"
             }
         }
     }
