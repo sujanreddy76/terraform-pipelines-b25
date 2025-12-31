@@ -1,0 +1,7 @@
+
+local_vpc_name = "my-dev-vpc"
+local_subnet_name = "my-dev-subnet"
+local_subnet_cidr = "10.7.0.0/16"
+local_vm_name = "my-dev-vm"
+local_machine_type = "e2-medium"
+local_vm_zone = "us-central1-a"
