@@ -14,7 +14,9 @@ pipeline{
         )
     }
     environment {
+        GCS_BUCKET = "project-d2753c31-d4fd-4167-bb9-iac-bucket"
         GOOGLE_APPLICATION_CREDENTIALS = "${WORKSPACE}/sa-key.json"
+        TFVARS_FILE = "${params.ENVIRONMENT}.tfvars"
     }
     stages {
         stage('Setup GCP Auth') {
@@ -31,7 +33,9 @@ pipeline{
         stage('init') {
             steps {
                 echo "Initializing the terraform"
-                sh "terraform init"
+                sh """
+                terraform init --backend-config="bucket=${env.GCS_BUCKET}" --bakend-config="prefix=${params.ENVIRONMENT}"
+                """
             }
 
         }
@@ -45,7 +49,7 @@ pipeline{
             }
             steps {
                 echo "Executing the plan for terraform"
-                sh "terraform plan"
+                sh "terraform plan -var-file=${env.TFVARS_FILE}"
             }
         }
 
@@ -58,7 +62,7 @@ pipeline{
             }
             steps {
                 echo "Applying terraform infra"
-                sh "terraform apply --auto-approve"
+                sh "terraform apply -var-file=${env.TFVARS_FILE} --auto-approve"
             }
         }
 
@@ -71,6 +75,7 @@ pipeline{
             }
             steps {
                 echo "Destroying the terraform infra"
+                sh "terraform destroy -var-file=${env.TFVARS_FILE} --auto-approv"
             }
         }
     }

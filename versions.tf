@@ -1,7 +1,4 @@
 terraform {
-  backend "gcs" {
-    bucket = ""
-    prefix = ""
-    
+  backend "gcs" {  
   }
 }
