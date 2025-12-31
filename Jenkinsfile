@@ -69,5 +69,11 @@ pipeline{
             }
         }
     }
+    post {
+        always {
+            echo "************* Do clean the workspace *******************"
+            cleanWs() //removes this pipeline workspace(each job,pipeline has its own workspace)
+        }
+    }
 
 }
